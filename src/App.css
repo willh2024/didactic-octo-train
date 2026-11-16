@@ -1,0 +1,83 @@
+:root {
+  --neon-cyan: #22e5ff;
+  --neon-magenta: #ff2bd6;
+  --neon-green: #39ff88;
+  --neon-red: #ff4d6d;
+  --panel: rgba(8, 10, 28, 0.78);
+}
+
+html,
+body {
+  margin: 0;
+  background: transparent;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: "Orbitron", "Segoe UI", system-ui, sans-serif;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 18px 40px 18px 28px;
+  background: linear-gradient(135deg, var(--panel), rgba(30, 8, 40, 0.78));
+  border: 2px solid var(--neon-cyan);
+  border-radius: 18px;
+  box-shadow:
+    0 0 6px var(--neon-cyan),
+    0 0 22px rgba(34, 229, 255, 0.55),
+    inset 0 0 18px rgba(255, 43, 214, 0.28);
+}
+
+.emblem {
+  height: 88px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(34, 229, 255, 0.85));
+}
+
+.score {
+  font-size: 72px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  font-variant-numeric: tabular-nums;
+  color: #eaffff;
+  text-shadow:
+    0 0 6px var(--neon-cyan),
+    0 0 16px var(--neon-cyan),
+    0 0 38px rgba(34, 229, 255, 0.7);
+}
+
+.delta {
+  font-size: 32px;
+  font-weight: 700;
+  animation: pop 0.6s ease-out;
+}
+
+.delta.up {
+  color: var(--neon-green);
+  text-shadow: 0 0 8px var(--neon-green), 0 0 20px rgba(57, 255, 136, 0.65);
+}
+
+.delta.down {
+  color: var(--neon-red);
+  text-shadow: 0 0 8px var(--neon-red), 0 0 20px rgba(255, 77, 109, 0.65);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.95);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
