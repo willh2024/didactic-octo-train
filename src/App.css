@@ -25,8 +25,13 @@ body {
   align-items: center;
   gap: 22px;
   padding: 18px 40px 18px 28px;
-  background: linear-gradient(135deg, var(--panel), rgba(30, 8, 40, 0.78));
+  /* dark tint over the photo keeps the neon text readable; lower the alpha
+     values to let more of the background show through */
+  background:
+    linear-gradient(135deg, rgba(6, 8, 24, 0.55), rgba(26, 6, 36, 0.5)),
+    url("./background.jpg") center / cover no-repeat;
   border: 2px solid var(--neon-cyan);
+  overflow: hidden;
   border-radius: 18px;
   box-shadow:
     0 0 6px var(--neon-cyan),
@@ -38,6 +43,49 @@ body {
   height: 88px;
   width: auto;
   filter: drop-shadow(0 0 8px rgba(34, 229, 255, 0.85));
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.next-text {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #d6f6ff;
+  text-shadow: 0 0 6px rgba(34, 229, 255, 0.8);
+  margin-bottom: 6px;
+}
+
+.next-name {
+  color: var(--neon-magenta);
+  text-shadow: 0 0 8px var(--neon-magenta), 0 0 18px rgba(255, 43, 214, 0.6);
+  text-transform: uppercase;
+}
+
+.bar {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+  box-shadow: 0 0 10px var(--neon-cyan);
+  transition: width 1s ease-out;
 }
 
 .score {
@@ -55,6 +103,9 @@ body {
 .delta {
   font-size: 32px;
   font-weight: 700;
+  /* dark outline keeps the change readable over the bright background */
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.7);
+  paint-order: stroke fill;
   animation: pop 0.6s ease-out;
 }
 
