@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import "./App.css";
 import crown from "./crownie_from_lr.png";
+import { getRankProgress } from "./ranks";
 
 type PlayerResult = {
   ranking: string;
@@ -92,18 +93,46 @@ export default function App() {
     );
   }
 
+  // The rank boundaries are LR values, so the next-rank info is LR mode only.
+  const rank =
+    mmrType === "lr" && score !== null ? getRankProgress(score) : null;
+
   return (
     <div className="stats">
       <div className="card">
         {rankURL && <img src={rankURL} className="emblem" alt="" />}
-        <animated.span className="score">
-          {spring.val.to((x: number) => Math.round(x || 0).toString())}
-        </animated.span>
-        {diff !== "" && (
-          <span key={changeCount} className={`delta ${trend}`}>
-            {diff}
-          </span>
-        )}
+        <div className="info">
+          <div className="main">
+            <animated.span className="score">
+              {spring.val.to((x: number) => Math.round(x || 0).toString())}
+            </animated.span>
+            {diff !== "" && (
+              <span key={changeCount} className={`delta ${trend}`}>
+                {diff}
+              </span>
+            )}
+          </div>
+          {rank && (
+            <div className="next">
+              <div className="next-text">
+                {rank.next ? (
+                  <>
+                    <span>{rank.toNext} LR to </span>
+                    <span className="next-name">{rank.next.name}</span>
+                  </>
+                ) : (
+                  <span className="next-name">{rank.current.name} · max rank</span>
+                )}
+              </div>
+              <div className="bar">
+                <div
+                  className="fill"
+                  style={{ width: `${rank.progress * 100}%` }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
